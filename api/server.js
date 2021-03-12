@@ -1,7 +1,6 @@
 const cors = require("cors");
 const express = require("express");
 const helmet = require("helmet");
-require('dotenv').config();
 const path = require("path");
 
 const RouterAll = require("./app/routers/index");
@@ -26,21 +25,21 @@ RouterAll(app);
 //     console.log("Drop and re-sync db");
 // });
 
-// db.sequelize.sync({force: true}).then(()=>{
-//     console.log("Drop and re-sync db");
-//     initial();
-// });
+db.sequelize.sync({force: true}).then(()=>{
+    console.log("Drop and re-sync db");
+    initial();
+});
 
 //PORT
 if (!process.env.PORT) {
     console.log("Error to get port");
 }
-const PORT = process.env.PORT || 8081;
+const PORT = process.env.PORT || 8080;
 
 app.listen(PORT, () => {
     console.log(`Server is running on port ${PORT}.`);
 },(err=>{
-    console.log
+    console.log(err);
 }));
 
 function initial() {
@@ -57,35 +56,37 @@ function initial() {
         name: "admin"
     });
     
-    // User.create({
-    //     username: "username",
-    //     email: "email@gmail.csacaca",
-    //     password: bcrypt.hashSync("password", 8)
-    // }).then(userRes =>{
-    //     userRes.setRoles(1);
-    // });
-    // User.create({
-    //     username: "username1",
-    //     email: "email1@gmail.csacaca",
-    //     password: bcrypt.hashSync("password", 8)
-    // }).then(userRes =>{
-    //     userRes.setRoles(1);
-    // });
-    // User.create({
-    //     username: "username2",
-    //     email: "email2@gmail.csacaca",
-    //     password: bcrypt.hashSync("password", 8)
-    // }).then(userRes =>{
-    //     userRes.setRoles(1);
-    // });
-    // User.create({
-    //     username: "username3",
-    //     email: "email3@gmail.csacaca",
-    //     password: bcrypt.hashSync("passwordsdf", 8)
-    // }).then(userRes =>{
-    //     userRes.setRoles([1,2]);
-    // })
+    User.create({
+        username: "username",
+        email: "email@gmail.csacaca",
+        password: bcrypt.hashSync("password", 8)
+    }).then(userRes =>{
+        userRes.setRoles(1);
+    });
+    User.create({
+        username: "username1",
+        email: "email1@gmail.csacaca",
+        password: bcrypt.hashSync("password", 8)
+    }).then(userRes =>{
+        userRes.setRoles(1);
+    });
+    User.create({
+        username: "username2",
+        email: "email2@gmail.csacaca",
+        password: bcrypt.hashSync("password", 8)
+    }).then(userRes =>{
+        userRes.setRoles(1);
+    });
+    User.create({
+        username: "username3",
+        email: "email3@gmail.csacaca",
+        password: bcrypt.hashSync("passwordsdf", 8)
+    }).then(userRes =>{
+        userRes.setRoles([1,2]);
+    })
 }
+
+
 // routes
 // require("./app/routers/tutorial.routers")(app);
 // require("./app/routers/auth.router")(app);

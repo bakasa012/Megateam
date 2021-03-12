@@ -40,7 +40,6 @@ exports.getListUser =  async (req,res) => {
         message: "",
         data: null
     }
-    // return res.status(200).send(result)
     await User.findAll().then(data => {
         if (data) {
                 result.status = 200;
@@ -50,7 +49,7 @@ exports.getListUser =  async (req,res) => {
         }
         return res.status(200).send(result);
     })
-    // .catch(err=>{
-    //     console.log(err)
-    // });
+    .catch(err=>{
+        console.log(err)
+    });
 }

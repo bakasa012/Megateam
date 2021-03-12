@@ -10,7 +10,9 @@
     folder api: yarn start:dev | npm start:dev
     folder client: yarn start | npm start
 4 feature:
+    Hiện tại phần backend đã có 1 số chức năng như
+        +Login, register, kiểm tra token, kiểm tra roles
+        +Còn 1 số api về lesson sẽ được update sau khi hoàn thiện template
 
-    login
-    register
-    middleware: check auth-token, check roles
+
+#Copyright MegaTeam

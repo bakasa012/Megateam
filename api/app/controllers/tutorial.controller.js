@@ -1,5 +1,3 @@
-// const { where } = require("sequelize/types");
-// const { create } = require("ts-node");
 const db = require("../models");
 const Tutorial = db.tutorials;
 const Op = db.Sequelize.op;

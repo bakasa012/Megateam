@@ -55,14 +55,12 @@ db.question.belongsToMany(db.lesson, {
     through: "lesson_questions",
     foreignKey: "questionId",
     ortherKey: "questionId",
-    // ortherKey: { name: "id", type: Sequelize.INTEGER, primaryKey: true, autoIncrement: true }
 })
 
 db.lesson.belongsToMany(db.question, {
     through: "lesson_questions",
     foreignKey: "lessonID",
     ortherKey: "questionId",
-    // ortherKey: { name: "id", type: Sequelize.INTEGER, primaryKey: true, autoIncrement: true }
 })
 
 db.answer.belongsTo(db.question, {

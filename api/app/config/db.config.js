@@ -1,9 +1,9 @@
 // require('dotenv').config();
 module.exports = {
-  HOST: "localhost",//process.env.HOST || 
-  DB_USER: process.env.DB_USER || "root",
+  HOST: "localhost",
+  DB_USER: "root",
   DB_PASS: "",
-  DB_DATABASE: "testdb",//process.env.DB_DATABASE || 
+  DB_DATABASE: "megateam",
   dialect: "mysql",
   POOL: {
     max: 5,
@@ -12,11 +12,3 @@ module.exports = {
     idle: 10000
   }
 };
-
-// const sequelize = new Sequelize(APP_DB_URL, {
-//   logging: false,
-//   dialectOptions: {
-//     dateStrings: true,
-//     typeCast: true,
-//   },
-// }
