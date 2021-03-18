@@ -58,7 +58,7 @@ class App extends Component {
           <MuiPickersUtilsProvider utils={MomentUtils}>
             <Router history={history}>
               <ScrollReset />
-              <GoogleAnalytics/>
+              {/* <GoogleAnalytics/> */}
               {renderRoutes(routes)}
             </Router>
           </MuiPickersUtilsProvider>

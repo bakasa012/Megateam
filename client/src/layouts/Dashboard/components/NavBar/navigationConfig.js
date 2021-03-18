@@ -27,7 +27,7 @@ export default [
     title: 'Pages',
     pages: [
       {
-        title: 'Overview',
+        title: 'Home',
         href: '/presentation',
         icon: HomeIcon
       },

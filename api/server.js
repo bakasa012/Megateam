@@ -21,14 +21,14 @@ app.use(helmet());
 app.use(cors());
 app.use(express.json());
 RouterAll(app);
-// db.sequelize.sync().then(() => {
-//     console.log("Drop and re-sync db");
-// });
-
-db.sequelize.sync({force: true}).then(()=>{
+db.sequelize.sync().then(() => {
     console.log("Drop and re-sync db");
-    initial();
 });
+
+// db.sequelize.sync({force: true}).then(()=>{
+//     console.log("Drop and re-sync db");
+//     initial();
+// });
 
 //PORT
 if (!process.env.PORT) {

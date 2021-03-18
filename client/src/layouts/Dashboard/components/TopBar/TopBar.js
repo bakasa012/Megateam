@@ -188,6 +188,7 @@ const TopBar = props => {
           <div
             className={classes.search}
             ref={searchRef}
+            
           >
             <SearchIcon className={classes.searchIcon} />
             <Input
@@ -226,14 +227,6 @@ const TopBar = props => {
               </Paper>
             </ClickAwayListener>
           </Popper>
-          <Button
-            className={classes.trialButton}
-            onClick={handlePricingOpen}
-            variant="contained"
-          >
-            <LockIcon className={classes.trialIcon} />
-            Trial expired
-          </Button>
         </Hidden>
         <Hidden mdDown>
           <IconButton
