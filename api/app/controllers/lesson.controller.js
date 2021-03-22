@@ -75,6 +75,7 @@ exports.destroy = async (req, res) => {
     .catch(err=>console.log(err));
 }
 
+
 exports.destroyArray = async (req, res)=>{
     const arrayId = req.body.arrayId;
     await Lesson.delete({
