@@ -88,7 +88,7 @@ const LoginForm = props => {
     if (!hasError('email') && !hasError('password'))
       dispatch(login(formState.values.email, formState.values.password))
         .then((res) => {
-          router.history.push("/");
+          router.history.push("/admin");
         }).catch((err) => {
           console.log("error data :", err);
           setLoading(false);

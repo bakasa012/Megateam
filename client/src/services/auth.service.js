@@ -15,9 +15,9 @@ class AuthService{
         localStorage.removeItem("user");
     }
 
-    register(username, email, password){
+    register(username, email, password, firstName, lastName){
         return http.post("/auth/signup",{
-            username, email, password
+            username, email, password, firstName, lastName
         })
     }
 }
