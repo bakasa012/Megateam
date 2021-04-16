@@ -1,9 +1,9 @@
 // require('dotenv').config();
 module.exports = {
-  HOST: "localhost",
-  DB_USER: "root",
-  DB_PASS: "",
-  DB_DATABASE: "megateam",
+  HOST: "remotemysql.com",//"localhost",
+  DB_USER: "QonIsQd4Vi",
+  DB_PASS: "Uasd2vW1dw",
+  DB_DATABASE: "QonIsQd4Vi",
   dialect: "mysql",
   POOL: {
     max: 5,
