@@ -28,7 +28,7 @@ export default [
     pages: [
       {
         title: 'Home',
-        href: '/admin/presentation',
+        href: 'admin/presentation',
         icon: HomeIcon
       },
       // {
@@ -48,28 +48,28 @@ export default [
       // },
       {
         title: 'Management',
-        href: '/admin/management',
+        href: '/management',
         icon: BarChartIcon,
         children: [
           {
             title: 'Customers',
-            href: '/admin/management/customers'
+            href: '/management/customers'
           },
           {
             title: 'Customer Details',
-            href: '/admin/management/customers/1/summary'
+            href: '/management/customers/1/summary'
           },
           {
             title: 'Projects',
-            href: '/admin/management/projects'
+            href: '/management/projects'
           },
           {
             title: 'Orders',
-            href: '/admin/management/orders'
+            href: '/management/orders'
           },
           {
             title: 'Order Details',
-            href: '/admin/management/orders/1'
+            href: '/management/orders/1'
           }
         ]
       },

@@ -43,7 +43,7 @@ const MasterPage = (props) => {
     const classes = useStyles();
     const [openNavBarMobile, setOpenNavBarMobile] = useState(false);
     const session = useSelector(state => state.session);
-    const { user } = useSelector(state => state.authReducer);
+    // const { user } = useSelector(state => state.authReducer);
     const handleNavBarMobileOpen = () => {
         setOpenNavBarMobile(true);
     };
@@ -52,9 +52,9 @@ const MasterPage = (props) => {
         setOpenNavBarMobile(false);
     };
     console.log(1203, "dasboar", session)
-    if(!user){
-        return <Redirect to="/auth/login"/>
-    }
+    // if(!user){
+    //     return <Redirect to="/auth/login"/>
+    // }
     return (
         <div className={classes.root}>
             <TopBar
@@ -62,11 +62,11 @@ const MasterPage = (props) => {
                 onOpenNavBarMobile={handleNavBarMobileOpen}
             />
             <div className={classes.container}>
-                <NavBar
+                {/* <NavBar
                     className={classes.navBar}
                     onMobileClose={handleNavBarMobileClose}
                     openMobile={openNavBarMobile}
-                />
+                /> */}
                 <main className={classes.content}>
                     <Suspense fallback={<LinearProgress />}>
                         {renderRoutes(route.routes)}

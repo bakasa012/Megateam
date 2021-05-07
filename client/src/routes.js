@@ -4,13 +4,21 @@ import { Redirect } from "react-router-dom";
 import AuthLayout from "./layouts/Auth";
 import ErrorLayout from "./layouts/Error";
 import DashboardLayout from "./layouts/Dashboard";
+import MasterLayout from "./layouts/MasterPage";
+
 import PresentationView from './views/Presentation';
+import Lesion from './views/Lession';
 
 const routes = [
     {
+        path: '/admin',
+        exact: true,
+        component: () => <Redirect to="/admin/presentation" />
+    },
+    {
         path: '/',
         exact: true,
-        component: () => <Redirect to="/presentation" />
+        component: () => <Redirect to="/home/table" />
     },
     {
         path: '/auth',
@@ -24,7 +32,7 @@ const routes = [
             {
                 path: '/auth/register',
                 exact: true,
-                component: lazy(() => import('views/Login'))//import('views/Register'))
+                component: lazy(() => import('views/Register'))
             },
             {
                 component: () => <Redirect to="/errors/error-404" />
@@ -55,8 +63,9 @@ const routes = [
             }
         ]
     },
+    
     {
-        route: '*',
+        path: '/admin',
         component: DashboardLayout,
         routes: [
             // // {
@@ -125,7 +134,7 @@ const routes = [
             //     component: lazy(() => import('views/ProjectManagementList'))
             // },
             {
-                path: '/management/orders',
+                path: '/admin/management/orders',
                 exact: true,
                 component: lazy(() => import('views/TableData'))
             },
@@ -140,7 +149,7 @@ const routes = [
             //     component: OverviewView
             // },
             {
-                path: '/presentation',
+                path: 'admin/presentation',
                 exact: true,
                 component: PresentationView
             },
@@ -198,7 +207,28 @@ const routes = [
             //     component: () => <Redirect to="/errors/error-404" />
             // }
         ]
-    }
+    },
+
+    {
+        path:'/',
+        component: MasterLayout,
+        routes:[
+            {
+                path: '/home/table',
+                exact: true,
+                component: lazy(() => import('views/TableData'))
+            },
+            {
+                path: "/home",
+                exact: true,
+                component: lazy(()=> import("views/Lession")),
+            },
+            {
+                component: () => <Redirect to="/errors/error-404" />
+            },
+        ]
+    },
+
 ];
 
 export default routes;
