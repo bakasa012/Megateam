@@ -1,4 +1,4 @@
-import React, { useRef } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import {
   AppBar,
   Badge,
@@ -17,14 +17,18 @@ import {
   ClickAwayListener,
   makeStyles,
 } from "@material-ui/core";
-
+import { useDispatch } from "react-redux";
 import LockIcon from "@material-ui/icons/LockOutlined";
 import NotificationsIcon from "@material-ui/icons/NotificationsOutlined";
 import InputIcon from "@material-ui/icons/Input";
 import MenuIcon from "@material-ui/icons/Menu";
 import SearchIcon from "@material-ui/icons/Search";
+import axios from "utils/axios";
+import { Link as RouterLink } from "react-router-dom";
+import clsx from "clsx";
 
 import useRouter from "utils/masterRouter";
+import { PricingModal, NotificationsPopover } from "components";
 
 const useStyle = makeStyles((theme: any) => ({
   root: {
@@ -92,8 +96,166 @@ const Topbar = (props: any) => {
   const { history } = useRouter();
 
   const searchRef = useRef(null);
+  const dispatch = useDispatch();
+  const notificationsRef = useRef(null);
+  const [pricingModalOpen, setPricingModalOpen] = useState(false);
+  const [openSearchPopover, setOpenSearchPopover] = useState(false);
+  const [searchValue, setSearchValue] = useState("");
+  const [notifications, setNotifications] = useState([]);
+  const [openNotifications, setOpenNotifications] = useState(false);
 
-  return <div></div>;
+  useEffect(() => {
+    let mounted = true;
+
+    const fetchNotifications = () => {
+      axios.get("/api/account/notifications").then((response: any) => {
+        if (mounted) {
+          setNotifications(response.data.notifications);
+        }
+      });
+    };
+
+    fetchNotifications();
+
+    return () => {
+      mounted = false;
+    };
+  }, []);
+
+  //   const handleLogout = () => {
+  //     history.push('/auth/login');
+  //     // dispatch(logout());
+  //   };
+
+  const handlePricingOpen = () => {
+    setPricingModalOpen(true);
+  };
+
+  const handlePricingClose = () => {
+    setPricingModalOpen(false);
+  };
+
+  const handleNotificationsOpen = () => {
+    setOpenNotifications(true);
+  };
+
+  const handleNotificationsClose = () => {
+    setOpenNotifications(false);
+  };
+
+  const handleSearchChange = (event: any) => {
+    setSearchValue(event.target.value);
+
+    if (event.target.value) {
+      if (!openSearchPopover) {
+        setOpenSearchPopover(true);
+      }
+    } else {
+      setOpenSearchPopover(false);
+    }
+  };
+
+  const handleSearchPopverClose = () => {
+    setOpenSearchPopover(false);
+  };
+  const popularSearches = [
+    "Devias React Dashboard",
+    "Devias",
+    "Admin Pannel",
+    "Project",
+    "Pages",
+  ];
+  return (
+    <AppBar {...rest} className={clsx(classes.root, className)} color="primary">
+      <Toolbar>
+        <RouterLink to="/">
+          <img alt="Logo" src="/images/logos/logo--white.svg" />
+        </RouterLink>
+        <div className={classes.flexGrow} />
+        <Hidden smDown>
+          <div className={classes.search} ref={searchRef}>
+            <SearchIcon className={classes.searchIcon} />
+            <Input
+              className={classes.searchInput}
+              disableUnderline
+              onChange={handleSearchChange}
+              placeholder="Search people &amp; places"
+              value={searchValue}
+            />
+          </div>
+          <Popper
+            anchorEl={searchRef.current}
+            className={classes.searchPopper}
+            open={openSearchPopover}
+            transition
+          >
+            <ClickAwayListener onClickAway={handleSearchPopverClose}>
+              <Paper className={classes.searchPopperContent} elevation={3}>
+                <List>
+                  {popularSearches.map((search) => (
+                    <ListItem
+                      button
+                      key={search}
+                      onClick={handleSearchPopverClose}
+                    >
+                      <ListItemIcon>
+                        <SearchIcon />
+                      </ListItemIcon>
+                      <ListItemText primary={search} />
+                    </ListItem>
+                  ))}
+                </List>
+              </Paper>
+            </ClickAwayListener>
+          </Popper>
+          <Button
+            className={classes.trialButton}
+            onClick={handlePricingOpen}
+            variant="contained"
+          >
+            <LockIcon className={classes.trialIcon} />
+            Trial expired
+          </Button>
+        </Hidden>
+        <Hidden mdDown>
+          <IconButton
+            className={classes.notificationsButton}
+            color="inherit"
+            onClick={handleNotificationsOpen}
+            ref={notificationsRef}
+          >
+            <Badge
+              badgeContent={notifications.length}
+              classes={{ badge: classes.notificationsBadge }}
+              variant="dot"
+            >
+              <NotificationsIcon />
+            </Badge>
+          </IconButton>
+          <Button
+            className={classes.logoutButton}
+            color="inherit"
+            // onClick={handleLogout}
+          >
+            <InputIcon className={classes.logoutIcon} />
+            Sign out
+          </Button>
+        </Hidden>
+        <Hidden lgUp>
+          <IconButton color="inherit" onClick={onOpenNavBarMobile}>
+            <MenuIcon />
+          </IconButton>
+        </Hidden>
+      </Toolbar>
+      <PricingModal onClose={handlePricingClose} open={pricingModalOpen} />
+      <NotificationsPopover
+        anchorEl={notificationsRef.current}
+        notifications={notifications}
+        onClose={handleNotificationsClose}
+        open={openNotifications}
+      />
+    </AppBar>
+  );
 };
 
 export default Topbar;
