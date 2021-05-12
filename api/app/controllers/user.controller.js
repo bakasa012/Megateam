@@ -53,3 +53,24 @@ exports.getListUser =  async (req,res) => {
         console.log(err)
     });
 }
+
+const getListUser2 =  async (req,res) => {
+    const result = {
+        status: null,
+        message: "",
+        data: null
+    }
+    await User.findAll().then(data => {
+        if (data) {
+                result.status = 200;
+                result.message = "successfully";
+                result.data = data;
+            return res.status(200).send(result);
+        }
+        return res.status(200).send(result);
+    })
+    .catch(err=>{
+        console.log(err)
+    });
+}
+

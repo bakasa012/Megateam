@@ -7,9 +7,22 @@ module.exports = (sequelize, Sequelize) => {
             primaryKey: true,
             autoIncrement: true
         },
-        name:{
+        name: {
             type: Sequelize.STRING
         }
     });
+    Role.sync().then(() => {
+        Role.findOrCreate({
+            where: { name: "user" }
+        });
+
+        Role.findOrCreate({
+            where: { name: "moderator" }
+        });
+
+        Role.findOrCreate({
+            where: { name: "admin" }
+        });
+    })
     return Role;
 }

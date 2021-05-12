@@ -2,6 +2,8 @@ const { Router } = require("express");
 const controllerUser = require("../../controllers/user.controller");
 const { verifySingUp } = require("../../middlewares")
 const controllerAuth = require("../../controllers/auth.controller");
+// const controllerUser = require("../../controllers/user.controller");
+
 const router = Router();
 
 router.get("/test/all",controllerUser.getListUser);

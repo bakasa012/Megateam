@@ -10,15 +10,16 @@ const corsOptions = {
 }
 const app = express();
 
+//header
 app.use(function (req, res, next) {
-    res.setHeader(
-      'Content-Security-Policy',
-      "default-src 'self'; font-src 'self'; img-src 'self'; script-src 'self'; style-src 'self'; frame-src 'self'"
+    res.header(
+        "Access-Control-Allow-Headers",
+        "x-access-token, Origin, Content-Type, Accept"
     );
     next();
-  });
+});
 app.use(helmet());
-app.use(cors());
+// app.use(cors());
 app.use(express.json());
 RouterAll(app);
 db.sequelize.sync().then(() => {
@@ -34,13 +35,11 @@ db.sequelize.sync().then(() => {
 if (!process.env.PORT) {
     console.log("Error to get port");
 }
-const PORT = process.env.PORT || 8080;
+const PORT = process.env.PORT || 3000;
 
 app.listen(PORT, () => {
     console.log(`Server is running on port ${PORT}.`);
-},(err=>{
-    console.log(err);
-}));
+});
 
 function initial() {
     const Role = db.role;
@@ -87,18 +86,20 @@ function initial() {
 }
 
 
+
+// app.use(function (req, res, next) {
+//     res.setHeader(
+//       'Content-Security-Policy',
+//       "default-src 'self'; font-src 'self'; img-src 'self'; script-src 'self'; style-src 'self'; frame-src 'self'"
+//     );
+//     next();
+//   });
+
 // routes
 // require("./app/routers/tutorial.routers")(app);
 // require("./app/routers/auth.router")(app);
 // require("./app/routers/user.router")(app);
-//header
-// app.use(function (req, res, next) {
-//     res.header(
-//         "Access-Control-Allow-Headers",
-//         "x-access-token, Origin, Content-Type, Accept"
-//     );
-//     next();
-// });
+
 // function loadViews() {
 //     app.use(express.static(path.join(__dirname, './build')));
 //     app.get('/*', function (req, res) {
