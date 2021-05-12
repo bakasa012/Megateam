@@ -52,7 +52,7 @@ const DashBoard = (props) => {
     const handleNavBarMobileClose = () => {
         setOpenNavBarMobile(false);
     };
-    console.log(1203, "dasboar", session)
+    console.log(1203, "dashboard", session)
     if(!user){
         return <Redirect to="/auth/login"/>
     }
